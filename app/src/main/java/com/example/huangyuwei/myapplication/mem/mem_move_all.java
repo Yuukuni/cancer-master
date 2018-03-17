@@ -26,6 +26,7 @@ import android.widget.ToggleButton;
 import com.example.huangyuwei.myapplication.R;
 import com.example.huangyuwei.myapplication.database.CancerDatabase;
 import com.example.huangyuwei.myapplication.database.FoodTime;
+import com.example.huangyuwei.myapplication.database.MoveTime;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
@@ -47,7 +48,7 @@ public class mem_move_all extends Fragment{
     private MonthYearPickerDialog fromDatePickerDialog;
     private DatePickerDialog fromDayPickerDialog;
     private SimpleDateFormat datedbFormatter;
-    private List<FoodTime> fooddays;
+    private List<MoveTime> movedays;
     private List<day> graphdays;
     private DataPoint[] graphdata;
     private GraphView graph;
@@ -62,7 +63,7 @@ public class mem_move_all extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mem_food_all, container, false);
+        return inflater.inflate(R.layout.fragment_mem_move_all, container, false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -81,9 +82,9 @@ public class mem_move_all extends Fragment{
             fromDateEtxt.setText((currentDateView.getMonth()+1)+"月");
         else
             fromDateEtxt.setText((currentDateView.getMonth() + 1)+"/"+(currentDateView.getDate())+"那一週");
-        fooddays= CancerDatabase.getInMemoryDatabase(getContext()).foodTimeDao().getAllFoodTime();
+        movedays= CancerDatabase.getInMemoryDatabase(getContext()).moveTimeDao().getAllMoveTime();
         graphdays=new ArrayList<day>();
-        graph = (GraphView) getView().findViewById(R.id.food_graph);
+        graph = (GraphView) getView().findViewById(R.id.move_graph);
         refreshGraph();
         setDateField();
         Viewtoggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -176,22 +177,22 @@ public class mem_move_all extends Fragment{
         int j = 0;
         graphdays.clear();
         if (!week) {
-            for (int i = 0; i < fooddays.size(); i++) {
+            for (int i = 0; i < movedays.size(); i++) {
                 //Log.d(TAG,"month "+viewmonth.get(Calendar.MONTH));
-                if ((fooddays.get(i).date_id / 100) % 100 == (currentDateView.getMonth() + 1)) {
+                if ((movedays.get(i).date_id / 100) % 100 == (currentDateView.getMonth() + 1)) {
                     boolean dataexists = false;
                     for (j = 0; j < graphdays.size(); j++) {
-                        if (graphdays.get(j).date_id == fooddays.get(i).date_id) {
+                        if (graphdays.get(j).date_id == movedays.get(i).date_id) {
                             dataexists = true;
                             break;
                         }
                     }
                     if (dataexists)
-                        graphdays.get(j).calories += fooddays.get(i).calories;
+                        graphdays.get(j).calories += movedays.get(i).calories;
                     else {
                         day temp = new day();
-                        temp.calories = fooddays.get(i).calories;
-                        temp.date_id = fooddays.get(i).date_id;
+                        temp.calories = movedays.get(i).calories;
+                        temp.date_id = movedays.get(i).date_id;
                         graphdays.add(temp);
                     }
                 }
@@ -217,23 +218,23 @@ public class mem_move_all extends Fragment{
             int date=Integer.parseInt(datedbFormatter.format(cal.getTime()));
             cal2.add(Calendar.DATE, -6);
             int dateBefore6Days=Integer.parseInt(datedbFormatter.format(cal2.getTime()));
-            for (int i = 0; i < fooddays.size(); i++) {
+            for (int i = 0; i < movedays.size(); i++) {
                 //Log.d(TAG,"month "+viewmonth.get(Calendar.MONTH));
-                if (fooddays.get(i).date_id <= date
-                        && fooddays.get(i).date_id >= dateBefore6Days) {
+                if (movedays.get(i).date_id <= date
+                        && movedays.get(i).date_id >= dateBefore6Days) {
                     boolean dataexists = false;
                     for (j = 0; j < graphdays.size(); j++) {
-                        if (graphdays.get(j).date_id == fooddays.get(i).date_id) {
+                        if (graphdays.get(j).date_id == movedays.get(i).date_id) {
                             dataexists = true;
                             break;
                         }
                     }
                     if (dataexists)
-                        graphdays.get(j).calories += fooddays.get(i).calories;
+                        graphdays.get(j).calories += movedays.get(i).calories;
                     else {
                         day temp = new day();
-                        temp.calories = fooddays.get(i).calories;
-                        temp.date_id = fooddays.get(i).date_id;
+                        temp.calories = movedays.get(i).calories;
+                        temp.date_id = movedays.get(i).date_id;
                         graphdays.add(temp);
                     }
                 }
