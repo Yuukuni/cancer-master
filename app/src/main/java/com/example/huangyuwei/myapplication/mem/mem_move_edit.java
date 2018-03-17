@@ -216,7 +216,7 @@ public class mem_move_edit extends Fragment{
 
         TextView textViewDuration = (TextView)tr.findViewById(R.id.TextViewDuration);
         textViewDuration.setText(duration.toString());
-        
+
         TextView textViewCalories = (TextView)tr.findViewById(R.id.TextViewCalories);
         textViewCalories.setText(calories.toString());
 

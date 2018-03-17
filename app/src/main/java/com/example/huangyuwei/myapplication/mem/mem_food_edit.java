@@ -195,20 +195,20 @@ public class mem_food_edit extends Fragment{
         String food = fooddata.FoodName;
         Double calories = fooddata.calories;
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        TableRow tr = (TableRow)inflater.inflate(R.layout.table_row, tl, false);
+        TableRow tr = (TableRow)inflater.inflate(R.layout.table_row_mem_food, tl, false);
 
         // Add First Column
-        TextView Name = (TextView)tr.findViewById(R.id.Name);
+        TextView textViewTime = (TextView)tr.findViewById(R.id.TextViewTime);
         Calendar dcal= Calendar.getInstance();
         dcal.set(dcal.get(Calendar.YEAR), dcal.get(Calendar.MONTH), dcal.get(Calendar.DAY_OF_MONTH),time/100,time%100);
-        Name.setText(timeFormatter.format(dcal.getTime()));
+        textViewTime.setText(timeFormatter.format(dcal.getTime()));
 
         // Add the 3rd Column
-        TextView Phone = (TextView)tr.findViewById(R.id.Phone);
-        Phone.setText(food);
+        TextView textViewFood = (TextView)tr.findViewById(R.id.TextViewFood);
+        textViewFood.setText(food);
 
-        TextView Address = (TextView)tr.findViewById(R.id.Address);
-        Address.setText(calories.toString());
+        TextView textViewCalories = (TextView)tr.findViewById(R.id.TextViewCalories);
+        textViewCalories.setText(calories.toString());
 
 
         final int dtime= time;
