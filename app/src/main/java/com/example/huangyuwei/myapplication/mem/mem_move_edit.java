@@ -26,6 +26,7 @@ import android.widget.TimePicker;
 import com.example.huangyuwei.myapplication.R;
 import com.example.huangyuwei.myapplication.database.CancerDatabase;
 import com.example.huangyuwei.myapplication.database.FoodTime;
+import com.example.huangyuwei.myapplication.database.MoveTime;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -41,7 +42,7 @@ public class mem_move_edit extends Fragment{
     private EditText fromDateEtxt;
     private EditText fromTimeEtxt;
     private TextView tablelabel;
-    private TableLayout foodtable;
+    private TableLayout movetable;
     private DatePickerDialog fromDatePickerDialog;
     private TimePickerDialog fromTimePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -49,9 +50,9 @@ public class mem_move_edit extends Fragment{
     private SimpleDateFormat timeFormatter;
     private SimpleDateFormat timedbFormatter;
     //private Button saveFood;
-    private Button addFood;
+    private Button addMove;
     private Date currentDateView;
-    private List<FoodTime> fooddays;
+    private List<MoveTime> movedays;
     public mem_move_edit() {
         // Required empty public constructor
     }
@@ -61,7 +62,7 @@ public class mem_move_edit extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mem_food_edit, container, false);
+        return inflater.inflate(R.layout.fragment_mem_move_edit, container, false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -81,23 +82,23 @@ public class mem_move_edit extends Fragment{
         fromDateEtxt.setText(dateFormatter.format(Calendar.getInstance().getTime()));
 
         tablelabel.setText(dateFormatter.format(Calendar.getInstance().getTime()));
-        fooddays=CancerDatabase.getInMemoryDatabase(getContext()).foodTimeDao().getAllFoodTime();
+        movedays=CancerDatabase.getInMemoryDatabase(getContext()).moveTimeDao().getAllMoveTime();
         currentDateView=Calendar.getInstance().getTime();
-        for (int i = 0; i <fooddays.size(); i++) {
-            if(Integer.parseInt(datedbFormatter.format(currentDateView)) == fooddays.get(i).date_id) {
-                Log.d("TAG", fooddays.get(i).time + " " + fooddays.get(i).FoodName + " " + fooddays.get(i).calories);
-                addTableRow(foodtable, fooddays.get(i));
+        for (int i = 0; i <movedays.size(); i++) {
+            if(Integer.parseInt(datedbFormatter.format(currentDateView)) == movedays.get(i).date_id) {
+                Log.d("TAG", movedays.get(i).time + " " + movedays.get(i).MoveName + " " + movedays.get(i).duration + " " + movedays.get(i).calories);
+                addTableRow(movetable, movedays.get(i));
             }
         }
 
 
 
 
-        addFood.setOnClickListener(new View.OnClickListener() {
+        addMove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                final View dialoglayout = inflater.inflate(R.layout.foodday_dialog,null);
+                final View dialoglayout = inflater.inflate(R.layout.moveday_dialog,null);
 //layout_root should be the name of the "top-level" layout node in the dialog_layout.xml file.
 
                 //Building dialog
@@ -134,30 +135,35 @@ public class mem_move_edit extends Fragment{
                         String timeindb=timedbFormatter.format(timedb);
 
 
-                        final EditText foodtext = (EditText) dialoglayout.findViewById(R.id.EditTextFood);
-                        String food = foodtext.getText().toString();
+                        final EditText movetext = (EditText) dialoglayout.findViewById(R.id.EditTextMove);
+                        String move = movetext.getText().toString();
 
-                        final EditText foodCalories = (EditText) dialoglayout.findViewById(R.id.EditTextFoodCalories);;
-                        String calories = foodCalories.getText().toString();
+                        final EditText moveDuration = (EditText) dialoglayout.findViewById(R.id.EditTextDuration);
+                        String duration = moveDuration.getText().toString();
 
-                        FoodTime ftime = new FoodTime();
+                        final EditText moveCalories = (EditText) dialoglayout.findViewById(R.id.EditTextMoveCalories);
+                        String calories = moveCalories.getText().toString();
 
-                        ftime.date_id=Integer.parseInt(dateindb);
-                        ftime.time=Integer.parseInt(timeindb);
-                        ftime.FoodName=food;
-                        ftime.calories=Double.parseDouble(calories);
-                        Log.d("TAG",dateindb+" "+timeindb+ " "+food+" "+calories);
+                        MoveTime mtime = new MoveTime();
+
+                        mtime.date_id=Integer.parseInt(dateindb);
+                        mtime.time=Integer.parseInt(timeindb);
+                        mtime.MoveName=move;
+                        mtime.duration=Double.parseDouble(duration);
+                        mtime.calories=Double.parseDouble(calories);
+                        Log.d("TAG",dateindb+" "+timeindb+ " "+move+" "+duration+" "+calories);
                         //addFoodDay(CancerDatabase.getInMemoryDatabase(getContext()),day);
                         boolean unique=true;
-                        for(int i=0;i<fooddays.size();i++){
-                            if(fooddays.get(i).time==Integer.parseInt(timeindb) && fooddays.get(i).date_id==Integer.parseInt(dateindb))
+                        for(int i=0;i<movedays.size();i++){
+                            if(movedays.get(i).time==Integer.parseInt(timeindb) && movedays.get(i).date_id==Integer.parseInt(dateindb))
                                 unique=false;
                         }
                         if(unique) {
-                            addFoodTime(cb, ftime);
+                            addMoveTime(cb, mtime);
                             refreshTable();
-                            foodtext.setText("");
-                            foodCalories.setText("");
+                            movetext.setText("");
+                            moveDuration.setText("");
+                            moveCalories.setText("");
                             dialog.dismiss();
                         }
                         else{
@@ -168,8 +174,8 @@ public class mem_move_edit extends Fragment{
                                             dialog.dismiss();
                                         }
                                     })
-                                    .setMessage( "同一個時間不能一直輸入食物哦" )
-                                    .setTitle("吃太多了吧")
+                                    .setMessage( "同一個時間不能一直輸入運動哦" )
+                                    .setTitle("運動太多了吧")
                                     .create();
                             d.show();
                         }
@@ -190,34 +196,38 @@ public class mem_move_edit extends Fragment{
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void addTableRow(TableLayout tl, final FoodTime fooddata){
-        int time = fooddata.time;
-        String food = fooddata.FoodName;
-        Double calories = fooddata.calories;
+    private void addTableRow(TableLayout tl, final MoveTime movedata){
+        int time = movedata.time;
+        String move = movedata.MoveName;
+        Double duration = movedata.duration;
+        Double calories = movedata.calories;
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        TableRow tr = (TableRow)inflater.inflate(R.layout.table_row, tl, false);
+        TableRow tr = (TableRow)inflater.inflate(R.layout.table_row_mem_move, tl, false);
 
         // Add First Column
-        TextView Name = (TextView)tr.findViewById(R.id.Name);
+        TextView textViewTime = (TextView)tr.findViewById(R.id.TextViewTime);
         Calendar dcal= Calendar.getInstance();
         dcal.set(dcal.get(Calendar.YEAR), dcal.get(Calendar.MONTH), dcal.get(Calendar.DAY_OF_MONTH),time/100,time%100);
-        Name.setText(timeFormatter.format(dcal.getTime()));
+        textViewTime.setText(timeFormatter.format(dcal.getTime()));
 
         // Add the 3rd Column
-        TextView Phone = (TextView)tr.findViewById(R.id.Phone);
-        Phone.setText(food);
+        TextView textViewMove = (TextView)tr.findViewById(R.id.TextViewMove);
+        textViewMove.setText(move);
 
-        TextView Address = (TextView)tr.findViewById(R.id.Address);
-        Address.setText(calories.toString());
+        TextView textViewDuration = (TextView)tr.findViewById(R.id.TextViewDuration);
+        textViewDuration.setText(duration.toString());
+        
+        TextView textViewCalories = (TextView)tr.findViewById(R.id.TextViewCalories);
+        textViewCalories.setText(calories.toString());
 
 
         final int dtime= time;
-        final String s = "確定刪除"+dtime/100+":"+ dtime%100+"的"+food+"嗎？";
+        final String s = "確定刪除"+dtime/100+":"+ dtime%100+"的"+move+"嗎？";
         tr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                final View dialoglayout = inflater.inflate(R.layout.foodday_dialog,null);
+                final View dialoglayout = inflater.inflate(R.layout.moveday_dialog,null);
 //layout_root should be the name of the "top-level" layout node in the dialog_layout.xml file.
 
                 //Building dialog
@@ -228,12 +238,14 @@ public class mem_move_edit extends Fragment{
                 fromTimeEtxt.requestFocus();
                 setTimeField();
                 Calendar cl=Calendar.getInstance();
-                cl.set(cl.get(Calendar.YEAR), cl.get(Calendar.MONTH), cl.get(Calendar.DAY_OF_MONTH),fooddata.time/100,fooddata.time%100);
+                cl.set(cl.get(Calendar.YEAR), cl.get(Calendar.MONTH), cl.get(Calendar.DAY_OF_MONTH),movedata.time/100,movedata.time%100);
                 fromTimeEtxt.setText(timeFormatter.format(cl.getTime()));
-                EditText oldfoodtext = (EditText) dialoglayout.findViewById(R.id.EditTextFood);
-                EditText oldfoodCalories = (EditText) dialoglayout.findViewById(R.id.EditTextFoodCalories);
-                oldfoodtext.setText(fooddata.FoodName);
-                oldfoodCalories.setText(fooddata.calories.toString());
+                EditText oldmovetext = (EditText) dialoglayout.findViewById(R.id.EditTextMove);
+                EditText oldmoveduration = (EditText) dialoglayout.findViewById(R.id.EditTextDuration);
+                EditText oldmoveCalories = (EditText) dialoglayout.findViewById(R.id.EditTextMoveCalories);
+                oldmovetext.setText(movedata.MoveName);
+                oldmoveduration.setText(movedata.duration.toString());
+                oldmoveCalories.setText(movedata.calories.toString());
 
                 builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
@@ -266,32 +278,37 @@ public class mem_move_edit extends Fragment{
                         String timeindb=timedbFormatter.format(timedb);
 
 
-                        final EditText foodtext = (EditText) dialoglayout.findViewById(R.id.EditTextFood);
-                        String food = foodtext.getText().toString();
+                        final EditText movetext = (EditText) dialoglayout.findViewById(R.id.EditTextMove);
+                        String move = movetext.getText().toString();
 
-                        final EditText foodCalories = (EditText) dialoglayout.findViewById(R.id.EditTextFoodCalories);;
-                        String calories = foodCalories.getText().toString();
+                        final EditText moveDuration = (EditText) dialoglayout.findViewById(R.id.EditTextDuration);
+                        String duration = moveDuration.getText().toString();
 
-                        FoodTime ftime = new FoodTime();
+                        final EditText moveCalories = (EditText) dialoglayout.findViewById(R.id.EditTextMoveCalories);;
+                        String calories = moveCalories.getText().toString();
 
-                        ftime.date_id=Integer.parseInt(dateindb);
-                        ftime.time=Integer.parseInt(timeindb);
-                        ftime.FoodName=food;
-                        ftime.calories=Double.parseDouble(calories);
-                        Log.d("TAG",dateindb+" "+timeindb+ " "+food+" "+calories);
+                        MoveTime mtime = new MoveTime();
+
+                        mtime.date_id=Integer.parseInt(dateindb);
+                        mtime.time=Integer.parseInt(timeindb);
+                        mtime.MoveName=move;
+                        mtime.duration=Double.parseDouble(duration);
+                        mtime.calories=Double.parseDouble(calories);
+                        Log.d("TAG",dateindb+" "+timeindb+ " "+move+" "+duration+" "+calories);
                         //addFoodDay(CancerDatabase.getInMemoryDatabase(getContext()),day);
                         boolean unique=true;
-                        for(int i=0;i<fooddays.size();i++){
-                            if(fooddays.get(i) != fooddata) {
-                                if (fooddays.get(i).date_id == ftime.date_id && fooddays.get(i).time == ftime.time)
+                        for(int i=0;i<movedays.size();i++){
+                            if(movedays.get(i) != movedata) {
+                                if (movedays.get(i).date_id == mtime.date_id && movedays.get(i).time == mtime.time)
                                     unique = false;
                             }
                         }
                         if(unique) {
-                            updateFoodTime(cb, ftime);
+                            updateMoveTime(cb, mtime);
                             refreshTable();
-                            foodtext.setText("");
-                            foodCalories.setText("");
+                            movetext.setText("");
+                            moveDuration.setText("");
+                            moveCalories.setText("");
                         }
                         else{
                             final AlertDialog d = new AlertDialog.Builder(getContext())
@@ -331,7 +348,7 @@ public class mem_move_edit extends Fragment{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                deleteFoodTime(cb, fooddata);
+                                deleteMoveTime(cb, movedata);
                                 refreshTable();
                             }
                         })
@@ -355,10 +372,10 @@ public class mem_move_edit extends Fragment{
 
 
 
-    private FoodTime addFoodTime(final CancerDatabase db, FoodTime time) {
+    private MoveTime addMoveTime(final CancerDatabase db, MoveTime time) {
         db.beginTransaction();
         try {
-            db.foodTimeDao().insertFoodTime(time);
+            db.moveTimeDao().insertMoveTime(time);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -366,10 +383,10 @@ public class mem_move_edit extends Fragment{
         return time;
     }
 
-    private FoodTime deleteFoodTime(final CancerDatabase db, FoodTime time) {
+    private MoveTime deleteMoveTime(final CancerDatabase db, MoveTime time) {
         db.beginTransaction();
         try {
-            db.foodTimeDao().delete(time);
+            db.moveTimeDao().delete(time);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -377,10 +394,10 @@ public class mem_move_edit extends Fragment{
         return time;
     }
 
-    private FoodTime updateFoodTime(final CancerDatabase db, FoodTime time) {
+    private MoveTime updateMoveTime(final CancerDatabase db, MoveTime time) {
         db.beginTransaction();
         try {
-            db.foodTimeDao().updateFoodTime(time);
+            db.moveTimeDao().updateMoveTime(time);
             db.setTransactionSuccessful();
             Log.d("TAG","success123");
         } finally {
@@ -390,10 +407,10 @@ public class mem_move_edit extends Fragment{
     }
 
     private void findViewsById() {
-        tablelabel = (TextView) getActivity().findViewById(R.id.food_day_label);
-        foodtable = (TableLayout) getActivity().findViewById(R.id.food_daytable);
+        tablelabel = (TextView) getActivity().findViewById(R.id.move_day_label);
+        movetable = (TableLayout) getActivity().findViewById(R.id.move_daytable);
 
-        addFood=(Button)getView().findViewById(R.id.addFoodDay);
+        addMove=(Button)getView().findViewById(R.id.addMoveDay);
         fromDateEtxt = (EditText) getView().findViewById(R.id.EditTextDate);
     }
 
@@ -447,18 +464,18 @@ public class mem_move_edit extends Fragment{
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void refreshTable(){
-        int count = foodtable.getChildCount();
+        int count = movetable.getChildCount();
         for (int i = 2; i < count; i++) {
-            View child = foodtable.getChildAt(i);
+            View child = movetable.getChildAt(i);
             if (child instanceof TableRow) ((ViewGroup) child).removeAllViews();
         }
 
-        fooddays.clear();
-        fooddays=CancerDatabase.getInMemoryDatabase(getContext()).foodTimeDao().getAllFoodTime();
-        for (int i = 0; i <fooddays.size(); i++) {
-            if(Integer.parseInt(datedbFormatter.format(currentDateView)) == fooddays.get(i).date_id) {
-                Log.d("TAG", fooddays.get(i).time + " " + fooddays.get(i).FoodName + " " + fooddays.get(i).calories);
-                addTableRow(foodtable, fooddays.get(i));
+        movedays.clear();
+        movedays=CancerDatabase.getInMemoryDatabase(getContext()).moveTimeDao().getAllMoveTime();
+        for (int i = 0; i <movedays.size(); i++) {
+            if(Integer.parseInt(datedbFormatter.format(currentDateView)) == movedays.get(i).date_id) {
+                Log.d("TAG", movedays.get(i).time + " " + movedays.get(i).MoveName + " " + movedays.get(i).duration + " " + movedays.get(i).calories);
+                addTableRow(movetable, movedays.get(i));
             }
         }
     }
