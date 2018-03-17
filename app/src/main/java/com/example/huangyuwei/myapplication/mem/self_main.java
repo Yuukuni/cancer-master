@@ -15,6 +15,7 @@ public class self_main extends AppCompatActivity {
     Button btn_body;
     Button btn_cure;
     Button btn_mine;
+    Button btn_move;
 
 
     @Override
@@ -67,6 +68,16 @@ public class self_main extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext() , mem_body_main.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_body= (Button)findViewById(R.id.mem_move_button);
+        btn_body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext() , mem_move_main.class);
                 startActivity(intent);
             }
         });

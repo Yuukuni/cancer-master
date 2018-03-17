@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
+      <module fileurl="file://D:\_XiDream\ASCIIpath\school\cancer-master-on-git\app\app.iml" filepath="D:\_XiDream\ASCIIpath\school\cancer-master-on-git\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../cancer-master-on-git.iml" filepath="$PROJECT_DIR$/../cancer-master-on-git.iml" />
     </modules>
   </component>
 </project>

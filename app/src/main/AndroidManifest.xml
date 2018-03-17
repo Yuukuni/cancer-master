@@ -93,7 +93,8 @@
         <activity
             android:name=".move.move_exercise"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".mem.mem_move_main"></activity>
     </application>
 
 </manifest>

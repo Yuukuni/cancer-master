@@ -4,9 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://E:\cancer care project\cancer\app\app.iml" filepath="E:\cancer care project\cancer\app\app.iml" />
-      <module fileurl="file://C:\Users\user\Desktop\CancerAPP\cancer-master\cancer.iml" filepath="C:\Users\user\Desktop\CancerAPP\cancer-master\cancer.iml" />
       <module fileurl="file://E:\cancer care project\cancer\cancer.iml" filepath="E:\cancer care project\cancer\cancer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cancer-master.iml" filepath="$PROJECT_DIR$/cancer-master.iml" />
+      <module fileurl="file://C:\Users\user\Desktop\CancerAPP\cancer-master\cancer.iml" filepath="C:\Users\user\Desktop\CancerAPP\cancer-master\cancer.iml" />
+      <module fileurl="file://D:\_XiDream\ASCIIpath\school\cancer-master-on-git\cancer-master.iml" filepath="D:\_XiDream\ASCIIpath\school\cancer-master-on-git\cancer-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cancer-master-on-git.iml" filepath="$PROJECT_DIR$/cancer-master-on-git.iml" />
     </modules>
   </component>
 </project>
