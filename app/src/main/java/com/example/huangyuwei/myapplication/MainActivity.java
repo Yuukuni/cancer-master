@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.password);
         btn_signup_main = (Button)findViewById(R.id.btn_signup_main);
         autoLogin = (CheckBox)findViewById(R.id.autoLogin);
+        autoLogin.setTextColor(Color.parseColor("#4f4f4f"));
         linear_tab.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
