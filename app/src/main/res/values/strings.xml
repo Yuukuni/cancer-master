@@ -12,5 +12,6 @@
     <string name="title_activity_camera">CameraActivity</string>
     <string name="title_activity_mem_food_new">mem_food_new</string>
     <string name="title_activity_move_main">move_main</string>
+    <string name="google_maps_API_key">AIzaSyCennjDCFk8kGsQSk2u0wtf1CKOUK0R1EI</string>
 
 </resources>
