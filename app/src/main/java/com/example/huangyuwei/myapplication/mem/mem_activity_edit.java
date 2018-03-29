@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.huangyuwei.myapplication.R;
+import com.example.huangyuwei.myapplication.database.CancerDatabase;
+import com.example.huangyuwei.myapplication.database.MemActivity;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
@@ -25,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.example.huangyuwei.myapplication.MainActivity.cb;
 import static com.example.huangyuwei.myapplication.MainActivity.getContext;
 
 public class mem_activity_edit extends AppCompatActivity {
@@ -42,10 +46,10 @@ public class mem_activity_edit extends AppCompatActivity {
     private Button btn_select_location;
     private Button btn_confirm;
 
+    private int createDate, createTime;
     private String activity_name;
-    private String activity_from_date, activity_from_time;
-    private String activity_to_date, activity_to_time;
-    private String acitvity_location_name, activity_location_address;
+    private String activity_from_date, activity_from_time, activity_to_date, activity_to_time;
+    private String activity_location_name, activity_location_address;
     private String activity_remark;
 
     private DatePickerDialog fromDateDialog;
@@ -56,6 +60,8 @@ public class mem_activity_edit extends AppCompatActivity {
     private Date currentDate;
     private SimpleDateFormat dateFormatter;
     private SimpleDateFormat timeFormatter;
+    private SimpleDateFormat dateIntFormatter;
+    private SimpleDateFormat timeIntFormatter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -73,7 +79,7 @@ public class mem_activity_edit extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    void init() {
+    private void init() {
         activity_name_input = (EditText) findViewById(R.id.activity_name_input);
         activity_from_date_input = (EditText) findViewById(R.id.activity_from_date_input);
         activity_from_time_input = (EditText) findViewById(R.id.activity_from_time_input);
@@ -90,12 +96,14 @@ public class mem_activity_edit extends AppCompatActivity {
         activity_from_time = new String();
         activity_to_date = new String();
         activity_to_time = new String();
-        acitvity_location_name = new String();
+        activity_location_name = new String();
         activity_location_address = new String();
         activity_remark = new String();
 
         dateFormatter = new SimpleDateFormat("yyyy/MM/dd", Locale.TAIWAN);
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.TAIWAN);
+        dateIntFormatter = new SimpleDateFormat("yyyyMMdd", Locale.TAIWAN);
+        timeIntFormatter = new SimpleDateFormat("HHmmss", Locale.TAIWAN);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -226,26 +234,91 @@ public class mem_activity_edit extends AppCompatActivity {
         activity_location_address_input.setText(placeSelected.getAddress().toString());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setConfirmButton() {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getData();
-                
+                addActivity();
                 setResult(RESULT_OK);
                 finish();
             }
         });
     }
 
-    void getData() {
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void getData() {
+        currentDate = Calendar.getInstance().getTime();
+        createDate = Integer.parseInt(dateIntFormatter.format(currentDate));
+        createTime = Integer.parseInt(timeIntFormatter.format(currentDate));
         activity_name = activity_name_input.getText().toString();
         activity_from_date = activity_from_date_input.getText().toString();
         activity_from_time = activity_from_time_input.getText().toString();
         activity_to_date = activity_to_date_input.getText().toString();
         activity_to_time = activity_to_time_input.getText().toString();
-        acitvity_location_name = activity_location_name_input.getText().toString();
+        activity_location_name = activity_location_name_input.getText().toString();
         activity_location_address = activity_location_address_input.getText().toString();
         activity_remark = activity_remark_input.getText().toString();
+    }
+
+    private void addActivity() {
+        MemActivity activity = new MemActivity();
+        activity.createDate = createDate;
+        activity.createTime = createTime;
+        activity.name = activity_name;
+        activity.fromDate = activity_from_date;
+        activity.fromTime = activity_from_time;
+        activity.toDate = activity_to_date;
+        activity.toTime = activity_to_time;
+        activity.locationName = activity_location_name;
+        activity.locationAddress = activity_location_address;
+        activity.remark = activity_remark;
+        logActivity(activity);
+        addMemActivity(cb, activity);
+    }
+
+    private void logActivity(MemActivity activity) {
+            Log.d("TAG",
+                    "\ncreateDate: " + activity.createDate +
+                            "\ncreateDate: " + activity.createTime +
+                            "\nname: " + activity.name +
+                            "\nfromDate: " + activity.fromDate +
+                            "\nfromTime: " + activity.fromTime +
+                            "\ntoDate: " + activity.toDate +
+                            "\ntoTime: " + activity.toTime +
+                            "\nlocationName: " + activity.locationName +
+                            "\nlocationAddress: " + activity.locationAddress +
+                            "\nremark: " + activity.remark);
+    }
+
+    private void addMemActivity(final CancerDatabase db, MemActivity activity) {
+        db.beginTransaction();
+        try {
+            db.memActivityDao().insertMemActivity(activity);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    private void deleteMemActivity(final CancerDatabase db, MemActivity activity) {
+        db.beginTransaction();
+        try {
+            db.memActivityDao().delete(activity);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    private void updateMemActivity(final CancerDatabase db, MemActivity activity) {
+        db.beginTransaction();
+        try {
+            db.memActivityDao().updateMemActivity(activity);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
     }
 }

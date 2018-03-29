@@ -5,14 +5,15 @@ import android.arch.persistence.room.Entity;
 /**
  * Created by XiDream on 2018/3/27.
  */
-@Entity(tableName = "memActivity", primaryKeys = {"id"})
+@Entity(tableName = "memActivity", primaryKeys = {"createDate", "createTime"})
 public class MemActivity {
-    public int id;
+    public int createDate;
+    public int createTime;
     public String name;
-    public int fromDate;
-    public int fromTime;
-    public int toDate;
-    public int toTime;
+    public String fromDate;
+    public String fromTime;
+    public String toDate;
+    public String toTime;
     public String locationName;
     public String locationAddress;
     public String remark;
