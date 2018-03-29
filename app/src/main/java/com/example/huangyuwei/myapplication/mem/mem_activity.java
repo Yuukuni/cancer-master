@@ -50,10 +50,12 @@ public class mem_activity extends AppCompatActivity {
         for(int i = 0; i < activities.size(); i++) {
             MemActivity activity = activities.get(i);
             logActivity(activity);
+
             TableRow activityRow = (TableRow) inflater.inflate(R.layout.table_row_mem_activity, activityTable, false);
             TextView date = (TextView) activityRow.findViewById(R.id.MemActivityDate);
             TextView time = (TextView) activityRow.findViewById(R.id.MemActivityTime);
             TextView name = (TextView) activityRow.findViewById(R.id.MemActivityName);
+
             if(activity.fromDate.contentEquals(activity.toDate)) {
                 date.setText(activity.fromDate);
                 if(activity.fromTime.contentEquals(activity.toTime)) {
@@ -68,8 +70,28 @@ public class mem_activity extends AppCompatActivity {
                 time.setText(activity.fromTime + "\n" + activity.toTime);
             }
             name.setText(activity.name);
+
+            setOnClickListeners(activityRow, activity);
             activityTable.addView(activityRow);
         }
+    }
+
+    private void setOnClickListeners(TableRow activityRow, final MemActivity activity) {
+
+        activityRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final mem_activity_dialog activityContent = new mem_activity_dialog(mem_activity.this, activity);
+                activityContent.show();
+                activityContent.btn_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activityContent.dismiss();
+                    }
+                });
+            }
+        });
+
     }
 
     private void logActivity(MemActivity activity) {
