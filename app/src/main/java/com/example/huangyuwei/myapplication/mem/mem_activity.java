@@ -1,5 +1,7 @@
 package com.example.huangyuwei.myapplication.mem;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import com.example.huangyuwei.myapplication.R;
 import com.example.huangyuwei.myapplication.center;
 import com.example.huangyuwei.myapplication.cure.cure_main;
+import com.example.huangyuwei.myapplication.database.CancerDatabase;
 import com.example.huangyuwei.myapplication.database.MemActivity;
 
 import java.util.List;
@@ -122,7 +125,25 @@ public class mem_activity extends AppCompatActivity {
         activityRow.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
+                final AlertDialog d = new AlertDialog.Builder(mem_activity.this)
+                        .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                deleteMemActivity(cb, activity);
+                                refresh();
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setMessage("確定要刪除「" + activity.name + "」這個活動嗎")
+                        .setTitle("刪除活動「" + activity.name + "」" )
+                        .create();
+                d.show();
                 return true;
             }
         });
@@ -138,14 +159,29 @@ public class mem_activity extends AppCompatActivity {
         });
     }
 
+    private void deleteMemActivity(final CancerDatabase db, MemActivity activity) {
+        db.beginTransaction();
+        try {
+            db.memActivityDao().delete(activity);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == UPDATE_ACTIVITY) {
             if (resultCode == RESULT_OK) {
-                Intent intent = new Intent(mem_activity.this, mem_activity.class);
-                startActivity(intent);
-                finish();
+                refresh();
             }
         }
     }
+
+    private void refresh() {
+        Intent intent = new Intent(mem_activity.this, mem_activity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
