@@ -149,16 +149,6 @@ public class mem_activity extends AppCompatActivity {
         });
     }
 
-    private void setAddActivityButton() {
-        addActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mem_activity.this, mem_activity_edit.class);
-                startActivityForResult(intent, UPDATE_ACTIVITY);
-            }
-        });
-    }
-
     private void deleteMemActivity(final CancerDatabase db, MemActivity activity) {
         db.beginTransaction();
         try {
@@ -167,6 +157,16 @@ public class mem_activity extends AppCompatActivity {
         } finally {
             db.endTransaction();
         }
+    }
+
+    private void setAddActivityButton() {
+        addActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mem_activity.this, mem_activity_edit.class);
+                startActivityForResult(intent, UPDATE_ACTIVITY);
+            }
+        });
     }
 
     @Override
