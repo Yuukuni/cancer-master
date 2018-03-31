@@ -14,6 +14,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.huangyuwei.myapplication.R;
+import com.example.huangyuwei.myapplication.center;
+import com.example.huangyuwei.myapplication.cure.cure_main;
 import com.example.huangyuwei.myapplication.database.MemActivity;
 
 import java.util.List;
@@ -22,12 +24,12 @@ import static com.example.huangyuwei.myapplication.MainActivity.cb;
 
 public class mem_activity extends AppCompatActivity {
 
-    private static final int ADD_ACTIVITY = 0;
+    private static final int UPDATE_ACTIVITY = 0;
 
-    private Button addActivity;
-    private List<MemActivity> activities;
+    private List<MemActivity> allActivities;
     private TableLayout activityTable;
     private LayoutInflater inflater;
+    private Button addActivity;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -40,15 +42,15 @@ public class mem_activity extends AppCompatActivity {
     }
 
     private void init() {
-        addActivity = (Button) findViewById(R.id.addActivity);
-        activities = cb.memActivityDao().getAllMemActivity();
+        allActivities = cb.memActivityDao().getAllMemActivity();
         activityTable = (TableLayout) findViewById(R.id.activity_table);
         inflater = LayoutInflater.from(this);
+        addActivity = (Button) findViewById(R.id.addActivity);
     }
 
     private void setActivityTable() {
-        for(int i = 0; i < activities.size(); i++) {
-            MemActivity activity = activities.get(i);
+        for(int i = 0; i < allActivities.size(); i++) {
+            MemActivity activity = allActivities.get(i);
             logActivity(activity);
 
             TableRow activityRow = (TableRow) inflater.inflate(R.layout.table_row_mem_activity, activityTable, false);
@@ -76,24 +78,6 @@ public class mem_activity extends AppCompatActivity {
         }
     }
 
-    private void setOnClickListeners(TableRow activityRow, final MemActivity activity) {
-
-        activityRow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final mem_activity_dialog activityContent = new mem_activity_dialog(mem_activity.this, activity);
-                activityContent.show();
-                activityContent.btn_confirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        activityContent.dismiss();
-                    }
-                });
-            }
-        });
-
-    }
-
     private void logActivity(MemActivity activity) {
         Log.d("TAG",
                 "\ncreateDate: " + activity.createDate +
@@ -108,19 +92,55 @@ public class mem_activity extends AppCompatActivity {
                         "\nremark: " + activity.remark);
     }
 
+    private void setOnClickListeners(TableRow activityRow, final MemActivity activity) {
+        activityRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final mem_activity_dialog activityContent = new mem_activity_dialog(mem_activity.this, activity);
+                activityContent.show();
+                activityContent.btn_edit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activityContent.dismiss();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("activity", activity);
+                        Intent intent = new Intent();
+                        intent.setClass(mem_activity.this  , mem_activity_edit.class);
+                        intent.putExtras(bundle);
+                        startActivityForResult(intent, UPDATE_ACTIVITY);
+                    }
+                });
+                activityContent.btn_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activityContent.dismiss();
+                    }
+                });
+            }
+        });
+
+        activityRow.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                return true;
+            }
+        });
+    }
+
     private void setAddActivityButton() {
         addActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mem_activity.this, mem_activity_edit.class);
-                startActivityForResult(intent, ADD_ACTIVITY);
+                startActivityForResult(intent, UPDATE_ACTIVITY);
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ADD_ACTIVITY) {
+        if (requestCode == UPDATE_ACTIVITY) {
             if (resultCode == RESULT_OK) {
                 Intent intent = new Intent(mem_activity.this, mem_activity.class);
                 startActivity(intent);

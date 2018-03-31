@@ -7,7 +7,7 @@
     android:layout_marginTop="20dp"
     android:layout_marginBottom="20dp"
     android:layout_marginLeft="15dp"
-    android:layout_marginRight="30dp" >
+    android:layout_marginRight="20dp" >
 
             <TextView
                 android:id="@+id/activity_title_label"
@@ -52,14 +52,17 @@
                 android:id="@+id/activity_from_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"
-                app:layout_constraintLeft_toLeftOf="@+id/activity_from_time_label" />
+                android:textSize="20sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_from_time_label"
+                app:layout_constraintLeft_toRightOf="@+id/activity_from_time_label"
+                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:id="@+id/activity_from_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"
+                android:textSize="20sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_from_time_label"
                 app:layout_constraintLeft_toRightOf="@+id/activity_from_date"
                 android:layout_marginLeft="5dp" />
 
@@ -69,15 +72,16 @@
                 android:layout_height="wrap_content"
                 android:text="到"
                 android:textSize="20sp"
-                app:layout_constraintLeft_toRightOf="@id/activity_from_time"
+                app:layout_constraintRight_toRightOf="@id/activity_from_time_label"
                 app:layout_constraintTop_toBottomOf="@+id/activity_from_time_label"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp" />
 
             <TextView
                 android:id="@+id/activity_to_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"
                 app:layout_constraintLeft_toRightOf="@+id/activity_to_time_label"
                 android:layout_marginLeft="5dp" />
@@ -86,6 +90,7 @@
                 android:id="@+id/activity_to_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"
                 app:layout_constraintLeft_toRightOf="@+id/activity_to_date"
                 android:layout_marginLeft="5dp" />
@@ -132,18 +137,30 @@
                 android:id="@+id/activity_remark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/activity_remark_label"
                 app:layout_constraintLeft_toRightOf="@+id/activity_remark_label" />
 
             <Button
-                android:id="@+id/btn_confirm"
+                android:id="@+id/btn_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OK"
+                android:text="編輯"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/activity_remark_label"
+                app:layout_constraintRight_toLeftOf="@id/btn_cancel"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="5dp">
+            </Button>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/activity_remark_label"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="30dp" />
+                android:layout_marginTop="40dp" />
 
 </android.support.constraint.ConstraintLayout>

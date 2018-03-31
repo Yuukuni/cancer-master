@@ -52,10 +52,9 @@
                 android:layout_height="wrap_content"
                 android:text="到"
                 android:textSize="20sp"
-                app:layout_constraintLeft_toRightOf="@id/activity_from_time_input"
+                app:layout_constraintRight_toRightOf="@id/activity_from_time_label"
                 app:layout_constraintTop_toBottomOf="@+id/activity_from_time_label"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginTop="20dp" />
 
             <TextView
                 android:id="@+id/activity_location_label"
@@ -93,8 +92,9 @@
                 android:inputType="date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="@+id/activity_from_time_label"
-                app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"/>
+                app:layout_constraintLeft_toRightOf="@+id/activity_from_time_label"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_from_time_label"
+                android:layout_marginLeft="5dp" />
 
             <EditText
                 android:id="@+id/activity_from_time_input"
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toRightOf="@+id/activity_from_date_input"
-                app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"/>
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_from_time_label"/>
 
             <EditText
                 android:id="@+id/activity_to_date_input"
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/btn_select_location"
-                app:layout_constraintLeft_toLeftOf="@+id/activity_location_label"/>
+                app:layout_constraintLeft_toRightOf="@+id/activity_location_label"/>
 
             <TextView
                 android:id="@+id/activity_location_address_input"
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@+id/activity_location_name_input"
-                app:layout_constraintLeft_toLeftOf="@+id/activity_location_label"/>
+                app:layout_constraintLeft_toRightOf="@+id/activity_location_label"/>
 
             <Button
                 android:id="@+id/btn_select_location"
@@ -154,14 +154,27 @@
                 app:layout_constraintLeft_toRightOf="@+id/activity_remark_label"/>
 
             <Button
-                android:id="@+id/btn_confirm"
+                android:id="@+id/btn_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="儲存"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/activity_remark_label"
+                app:layout_constraintRight_toLeftOf="@id/btn_cancel"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="5dp">
+            </Button>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/activity_remark_label"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="30dp"/>
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="30dp" />
 
         </android.support.constraint.ConstraintLayout>
 

@@ -35,8 +35,8 @@ public class mem_activity_edit extends AppCompatActivity {
 
     private final int REQUEST_CODE_PLACEPICKER = 1;
 
-    private Context context;
-    private mem_activity_edit instance;
+    private boolean newActivity;
+    private MemActivity activity;
 
     private EditText activity_name_input;
     private EditText activity_from_date_input, activity_from_time_input;
@@ -44,7 +44,8 @@ public class mem_activity_edit extends AppCompatActivity {
     private TextView activity_location_name_input, activity_location_address_input;
     private EditText activity_remark_input;
     private Button btn_select_location;
-    private Button btn_confirm;
+    private Button btn_save;
+    private Button btn_cancel;
 
     private int createDate, createTime;
     private String activity_name;
@@ -68,14 +69,14 @@ public class mem_activity_edit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mem_activity_edit);
-        context = getContext();
         init();
         setFromDateField();
         setToDateField();
         setFromTimeField();
         setToTimeField();
         setSelectLocationButton();
-        setConfirmButton();
+        setSaveButton();
+        setCancelButton();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -89,7 +90,24 @@ public class mem_activity_edit extends AppCompatActivity {
         activity_location_address_input = (TextView) findViewById(R.id.activity_location_address_input);
         activity_remark_input = (EditText) findViewById(R.id.activity_remark_input);
         btn_select_location = (Button) findViewById(R.id.btn_select_location);
-        btn_confirm = (Button) findViewById(R.id.btn_confirm);
+        btn_save = (Button) findViewById(R.id.btn_save);
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
+
+        activity = (MemActivity) getIntent().getSerializableExtra("activity");
+        if(activity == null) {
+            newActivity = true;
+        }
+        else {
+            newActivity = false;
+            activity_name_input.setText(activity.name);
+            activity_from_date_input.setText(activity.fromDate);
+            activity_from_time_input.setText(activity.fromTime);
+            activity_to_date_input.setText(activity.toDate);
+            activity_to_time_input.setText(activity.toTime);
+            activity_location_name_input.setText(activity.locationName);
+            activity_location_address_input.setText(activity.locationAddress);
+            activity_remark_input.setText(activity.remark);
+        }
 
         activity_name = new String();
         activity_from_date = new String();
@@ -235,16 +253,29 @@ public class mem_activity_edit extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void setConfirmButton() {
-        btn_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getData();
-                addActivity();
-                setResult(RESULT_OK);
-                finish();
-            }
-        });
+    private void setSaveButton() {
+        if(newActivity){
+            btn_save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getData();
+                    addActivity();
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            });
+        }
+        else{
+            btn_save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getData();
+                    updateActivity();
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            });
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -278,18 +309,41 @@ public class mem_activity_edit extends AppCompatActivity {
         addMemActivity(cb, activity);
     }
 
+    private void updateActivity() {
+        activity.name = activity_name;
+        activity.fromDate = activity_from_date;
+        activity.fromTime = activity_from_time;
+        activity.toDate = activity_to_date;
+        activity.toTime = activity_to_time;
+        activity.locationName = activity_location_name;
+        activity.locationAddress = activity_location_address;
+        activity.remark = activity_remark;
+        logActivity(activity);
+        updateMemActivity(cb, activity);
+    }
+
     private void logActivity(MemActivity activity) {
-            Log.d("TAG",
-                    "\ncreateDate: " + activity.createDate +
-                            "\ncreateDate: " + activity.createTime +
-                            "\nname: " + activity.name +
-                            "\nfromDate: " + activity.fromDate +
-                            "\nfromTime: " + activity.fromTime +
-                            "\ntoDate: " + activity.toDate +
-                            "\ntoTime: " + activity.toTime +
-                            "\nlocationName: " + activity.locationName +
-                            "\nlocationAddress: " + activity.locationAddress +
-                            "\nremark: " + activity.remark);
+        Log.d("TAG",
+                "\ncreateDate: " + activity.createDate +
+                        "\ncreateDate: " + activity.createTime +
+                        "\nname: " + activity.name +
+                        "\nfromDate: " + activity.fromDate +
+                        "\nfromTime: " + activity.fromTime +
+                        "\ntoDate: " + activity.toDate +
+                        "\ntoTime: " + activity.toTime +
+                        "\nlocationName: " + activity.locationName +
+                        "\nlocationAddress: " + activity.locationAddress +
+                        "\nremark: " + activity.remark);
+    }
+
+    private void setCancelButton() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
     }
 
     private void addMemActivity(final CancerDatabase db, MemActivity activity) {

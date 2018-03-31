@@ -26,7 +26,8 @@ public class mem_activity_dialog extends Dialog {
     private TextView activity_location_name, activity_location_address;
     private TextView activity_remark;
 
-    Button btn_confirm;
+    Button btn_edit;
+    Button btn_cancel;
 
     public mem_activity_dialog(@NonNull Context context, MemActivity activity) {
         super(context);
@@ -50,7 +51,8 @@ public class mem_activity_dialog extends Dialog {
         activity_location_name = (TextView) findViewById(R.id.activity_location_name);
         activity_location_address = (TextView) findViewById(R.id.activity_location_address);
         activity_remark = (TextView) findViewById(R.id.activity_remark);
-        btn_confirm = (Button) findViewById(R.id.btn_confirm);
+        btn_edit = (Button) findViewById(R.id.btn_edit);
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
     }
 
     private void setContent() {
