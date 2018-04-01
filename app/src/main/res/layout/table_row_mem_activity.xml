@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/MemActivityDate"
             android:layout_width="130dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_span="2"
             android:background="@drawable/cell_shape"
             android:inputType="textMultiLine"
@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/MemActivityTime"
             android:layout_width="105dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_toRightOf="@id/MemActivityDate"
             android:background="@drawable/cell_shape"
             android:ems="10"
@@ -42,7 +42,7 @@
         <TextView
             android:id="@+id/MemActivityName"
             android:layout_width="147dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_toRightOf="@id/MemActivityTime"
             android:background="@drawable/cell_shape"
             android:ems="10"

@@ -95,6 +95,7 @@ public class mem_activity_edit extends AppCompatActivity {
 
         activity = (MemActivity) getIntent().getSerializableExtra("activity");
         if(activity == null) {
+            //logActivity(activity);
             newActivity = true;
         }
         else {
@@ -305,6 +306,7 @@ public class mem_activity_edit extends AppCompatActivity {
         activity.locationName = activity_location_name;
         activity.locationAddress = activity_location_address;
         activity.remark = activity_remark;
+        Log.d("ADD", "add_activity");
         logActivity(activity);
         addMemActivity(cb, activity);
     }
@@ -318,6 +320,7 @@ public class mem_activity_edit extends AppCompatActivity {
         activity.locationName = activity_location_name;
         activity.locationAddress = activity_location_address;
         activity.remark = activity_remark;
+        Log.d("UPDATE", "update_activity");
         logActivity(activity);
         updateMemActivity(cb, activity);
     }
@@ -350,16 +353,6 @@ public class mem_activity_edit extends AppCompatActivity {
         db.beginTransaction();
         try {
             db.memActivityDao().insertMemActivity(activity);
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
-    }
-
-    private void deleteMemActivity(final CancerDatabase db, MemActivity activity) {
-        db.beginTransaction();
-        try {
-            db.memActivityDao().delete(activity);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
