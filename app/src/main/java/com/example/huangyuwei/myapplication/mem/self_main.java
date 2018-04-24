@@ -17,6 +17,8 @@ public class self_main extends AppCompatActivity {
     Button btn_mine;
     Button btn_move;
     Button btn_activity;
+    Button btn_back;
+    Button btn_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,26 @@ public class self_main extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(self_main.this  , mem_activity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_back = (Button) findViewById(R.id.mem_back_button);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(self_main.this  , mem_back.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_setting = (Button) findViewById(R.id.mem_setting_button);
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(self_main.this  , mem_setting.class);
                 startActivity(intent);
             }
         });

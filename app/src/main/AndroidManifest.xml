@@ -98,15 +98,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".mem.mem_move_main" />
         <activity android:name=".mem.mem_activity" />
-        <activity android:name=".mem.mem_activity_edit"/>
+        <activity android:name=".mem.mem_activity_edit" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCennjDCFk8kGsQSk2u0wtf1CKOUK0R1EI" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".mem.mem_back" />
+        <activity android:name=".mem.mem_setting"></activity>
     </application>
 
 </manifest>
