@@ -9,6 +9,11 @@ import android.arch.persistence.room.Entity;
 public class MemSetting {
     public int primaryKey;
 
+    public boolean physicalUsed;
+    public boolean foodUsed;
+    public boolean moveUsed;
+    public boolean moodUsed;
+
     public boolean foodTimeUsed_1;
     public boolean foodTimeUsed_2;
     public boolean foodTimeUsed_3;
