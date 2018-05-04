@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.huangyuwei.myapplication.mem.mem_setting">
+
+    <TextView
+        android:id="@+id/TextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="設定"
+        android:textSize="10pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/physical_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/mem_setting_block"
+        app:layout_constraintLeft_toLeftOf="@id/settingBackgroundLeft"
+        app:layout_constraintRight_toRightOf="@id/settingBackgroundRight"
+        app:layout_constraintTop_toTopOf="@id/settingPhysicalBackgroundTop"
+        app:layout_constraintBottom_toBottomOf="@id/settingPhysicalBackgroundBottom"
+        />
+
+    <TextView
+        android:id="@+id/food_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/mem_setting_block"
+        app:layout_constraintLeft_toLeftOf="@id/settingBackgroundLeft"
+        app:layout_constraintRight_toRightOf="@id/settingBackgroundRight"
+        app:layout_constraintTop_toTopOf="@id/settingFoodBackgroundTop"
+        app:layout_constraintBottom_toBottomOf="@id/settingFoodBackgroundBottom"
+        />
+
+    <TextView
+        android:id="@+id/move_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/mem_setting_block"
+        app:layout_constraintLeft_toLeftOf="@id/settingBackgroundLeft"
+        app:layout_constraintRight_toRightOf="@id/settingBackgroundRight"
+        app:layout_constraintTop_toTopOf="@id/settingMoveBackgroundTop"
+        app:layout_constraintBottom_toBottomOf="@id/settingMoveBackgroundBottom"
+        />
+
+    <TextView
+        android:id="@+id/mood_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/mem_setting_block"
+        app:layout_constraintLeft_toLeftOf="@id/settingBackgroundLeft"
+        app:layout_constraintRight_toRightOf="@id/settingBackgroundRight"
+        app:layout_constraintTop_toTopOf="@id/settingMoodBackgroundTop"
+        app:layout_constraintBottom_toBottomOf="@id/settingMoodBackgroundBottom"
+        />
+
+    <TextView
+        android:id="@+id/physicalTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="身體症狀"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintTop_toTopOf="@id/settingPhysicalTop"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"/>
+
+    <Switch
+        android:id="@+id/physicalSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/settingPhysicalTop"
+        app:layout_constraintRight_toRightOf="@id/settingRight" />
+
+    <TextView
+        android:id="@+id/physicalSwitchState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@id/physicalSwitch"
+        app:layout_constraintBaseline_toBaselineOf="@id/physicalSwitch"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/physicalTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提醒時間"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/physicalTitle"
+        app:layout_constraintBottom_toTopOf="@id/physicalFrequency"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <EditText
+        android:id="@+id/physicalTimeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/physicalTime"
+        app:layout_constraintLeft_toRightOf="@id/physicalTime"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/physicalFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="頻率"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/settingPhysicalBottom"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/physicalFrequencyInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/physicalFrequency"
+        app:layout_constraintLeft_toRightOf="@id/physicalFrequency"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/foodTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="飲食"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_red_light"
+        app:layout_constraintTop_toTopOf="@id/settingFoodTop"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"/>
+
+    <Switch
+        android:id="@+id/foodSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/settingFoodTop"
+        app:layout_constraintRight_toRightOf="@id/settingRight" />
+
+    <TextView
+        android:id="@+id/foodSwitchState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@id/foodSwitch"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodSwitch"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/foodTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提醒時間"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/foodTitle"
+        app:layout_constraintBottom_toTopOf="@+id/foodFrequency"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <CheckBox
+        android:id="@+id/foodTimeCheckbox_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodTime"
+        app:layout_constraintLeft_toRightOf="@id/foodTime"
+        android:layout_marginLeft="5dp"/>
+
+    <EditText
+        android:id="@+id/foodTimeInput_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodTime"
+        app:layout_constraintLeft_toRightOf="@id/foodTimeCheckbox_1" />
+
+    <CheckBox
+        android:id="@+id/foodTimeCheckbox_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodTime"
+        app:layout_constraintLeft_toRightOf="@id/foodTimeInput_1"
+        android:layout_marginLeft="5dp"/>
+
+    <EditText
+        android:id="@+id/foodTimeInput_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodTime"
+        app:layout_constraintLeft_toRightOf="@id/foodTimeCheckbox_2" />
+
+    <CheckBox
+        android:id="@+id/foodTimeCheckbox_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodTime"
+        app:layout_constraintLeft_toRightOf="@id/foodTimeInput_2"
+        android:layout_marginLeft="5dp"/>
+
+    <EditText
+        android:id="@+id/foodTimeInput_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodTime"
+        app:layout_constraintLeft_toRightOf="@id/foodTimeCheckbox_3" />
+
+    <TextView
+        android:id="@+id/foodFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="頻率"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/settingFoodBottom"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/foodFrequencyInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/foodFrequency"
+        app:layout_constraintLeft_toRightOf="@id/foodFrequency"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/moveTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="運動"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_orange_light"
+        app:layout_constraintTop_toTopOf="@id/settingMoveTop"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"/>
+
+    <Switch
+        android:id="@+id/moveSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/settingMoveTop"
+        app:layout_constraintRight_toRightOf="@id/settingRight" />
+
+    <TextView
+        android:id="@+id/moveSwitchState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@id/moveSwitch"
+        app:layout_constraintBaseline_toBaselineOf="@id/moveSwitch"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/moveTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提醒時間"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/moveTitle"
+        app:layout_constraintBottom_toTopOf="@+id/moveFrequency"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <CheckBox
+        android:id="@+id/moveTimeCheckbox_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/moveTime"
+        app:layout_constraintLeft_toRightOf="@id/moveTime"
+        android:layout_marginLeft="5dp"/>
+
+    <EditText
+        android:id="@+id/moveTimeInput_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/moveTime"
+        app:layout_constraintLeft_toRightOf="@id/moveTimeCheckbox_1" />
+
+    <CheckBox
+        android:id="@+id/moveTimeCheckbox_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/moveTime"
+        app:layout_constraintLeft_toRightOf="@id/moveTimeInput_1"
+        android:layout_marginLeft="5dp"/>
+
+    <EditText
+        android:id="@+id/moveTimeInput_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/moveTime"
+        app:layout_constraintLeft_toRightOf="@id/moveTimeCheckbox_2" />
+
+    <TextView
+        android:id="@+id/moveFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="頻率"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/settingMoveBottom"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/moveFrequencyInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/moveFrequency"
+        app:layout_constraintLeft_toRightOf="@id/moveFrequency"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/moodTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="心情"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_purple"
+        app:layout_constraintTop_toTopOf="@id/settingMoodTop"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"/>
+
+    <Switch
+        android:id="@+id/moodSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/settingMoodTop"
+        app:layout_constraintRight_toRightOf="@id/settingRight" />
+
+    <TextView
+        android:id="@+id/moodSwitchState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@id/moodSwitch"
+        app:layout_constraintBaseline_toBaselineOf="@id/moodSwitch"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/moodTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提醒時間"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/moodTitle"
+        app:layout_constraintBottom_toTopOf="@+id/moodFrequency"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <EditText
+        android:id="@+id/moodTimeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/moodTime"
+        app:layout_constraintLeft_toRightOf="@id/moodTime"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/moodFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="頻率"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/settingMoodBottom"
+        app:layout_constraintLeft_toLeftOf="@id/settingLeft"
+        android:layout_marginTop="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/moodFrequencyInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/moodFrequency"
+        app:layout_constraintLeft_toRightOf="@id/moodFrequency"
+        android:layout_marginLeft="10dp"/>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="儲存"
+        app:layout_constraintTop_toBottomOf="@+id/settingMoodBackgroundBottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_cancel"
+        android:layout_marginRight="5dp"/>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="取消"
+        app:layout_constraintTop_toBottomOf="@+id/settingMoodBackgroundBottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/settingRight" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.12"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.88"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingBackgroundLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingBackgroundRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingPhysicalTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingPhysicalBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingPhysicalBackgroundTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.09"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingPhysicalBackgroundBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.26"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingFoodTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingFoodBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingFoodBackgroundTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingFoodBackgroundBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.46"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoveTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoveBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoveBackgroundTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.49"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoveBackgroundBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoodTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoodBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoodBackgroundTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.69"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/settingMoodBackgroundBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.86"
+        />
+
+</android.support.constraint.ConstraintLayout>

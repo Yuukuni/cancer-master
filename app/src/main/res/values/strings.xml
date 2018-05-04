@@ -12,5 +12,17 @@
     <string name="title_activity_camera">CameraActivity</string>
     <string name="title_activity_mem_food_new">mem_food_new</string>
     <string name="title_activity_move_main">move_main</string>
+    <string name="google_maps_API_key">AIzaSyCennjDCFk8kGsQSk2u0wtf1CKOUK0R1EI</string>
+
+    <string-array name="mem_setting_frequency">
+        <item>每天</item>
+        <item>禮拜一</item>
+        <item>禮拜二</item>
+        <item>禮拜三</item>
+        <item>禮拜四</item>
+        <item>禮拜五</item>
+        <item>禮拜六</item>
+        <item>禮拜日</item>
+    </string-array>
 
 </resources>

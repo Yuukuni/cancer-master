@@ -16,7 +16,9 @@ public class self_main extends AppCompatActivity {
     Button btn_cure;
     Button btn_mine;
     Button btn_move;
-
+    Button btn_activity;
+    Button btn_back;
+    Button btn_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class self_main extends AppCompatActivity {
             }
         });
 
-        btn_body= (Button)findViewById(R.id.mem_body_button);
+        btn_body = (Button)findViewById(R.id.mem_body_button);
         btn_body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,12 +74,42 @@ public class self_main extends AppCompatActivity {
             }
         });
 
-        btn_body= (Button)findViewById(R.id.mem_move_button);
-        btn_body.setOnClickListener(new View.OnClickListener() {
+        btn_move = (Button)findViewById(R.id.mem_move_button);
+        btn_move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext() , mem_move_main.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_activity = (Button) findViewById(R.id.mem_activity_button);
+        btn_activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(self_main.this  , mem_activity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_back = (Button) findViewById(R.id.mem_back_button);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(self_main.this  , mem_back.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_setting = (Button) findViewById(R.id.mem_setting_button);
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(self_main.this  , mem_setting.class);
                 startActivity(intent);
             }
         });

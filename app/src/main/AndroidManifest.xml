@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -94,7 +96,19 @@
             android:name=".move.move_exercise"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".mem.mem_move_main"></activity>
+        <activity android:name=".mem.mem_move_main" />
+        <activity android:name=".mem.mem_activity" />
+        <activity android:name=".mem.mem_activity_edit" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCennjDCFk8kGsQSk2u0wtf1CKOUK0R1EI" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".mem.mem_back" />
+        <activity android:name=".mem.mem_setting"></activity>
     </application>
 
 </manifest>

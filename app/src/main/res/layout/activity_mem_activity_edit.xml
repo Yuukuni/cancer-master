@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.huangyuwei.myapplication.mem.mem_activity_edit">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/activity_title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="活動"
+                android:textSize="10pt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <TextView
+                android:id="@+id/activity_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="名稱 : "
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_title_label"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/activity_from_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="時間 : "
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_name_label"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp" />
+
+            <TextView
+                android:id="@+id/activity_to_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="到"
+                android:textSize="20sp"
+                app:layout_constraintRight_toRightOf="@id/activity_from_time_label"
+                app:layout_constraintTop_toBottomOf="@+id/activity_from_time_label"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/activity_location_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地點 : "
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_to_time_input"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/activity_remark_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="備註 : "
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_location_address_input"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"/>
+
+            <EditText
+                android:id="@+id/activity_name_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textSize="20sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_name_label"
+                app:layout_constraintLeft_toRightOf="@+id/activity_name_label"/>
+
+            <EditText
+                android:id="@+id/activity_from_date_input"
+                android:inputType="date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/activity_from_time_label"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_from_time_label"
+                android:layout_marginLeft="5dp" />
+
+            <EditText
+                android:id="@+id/activity_from_time_input"
+                android:inputType="time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/activity_from_date_input"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_from_time_label"/>
+
+            <EditText
+                android:id="@+id/activity_to_date_input"
+                android:inputType="date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/activity_to_time_label"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"
+                android:layout_marginLeft="5dp"/>
+
+            <EditText
+                android:id="@+id/activity_to_time_input"
+                android:inputType="time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/activity_to_date_input"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_to_time_label"/>
+
+            <TextView
+                android:id="@+id/activity_location_name_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/btn_select_location"
+                app:layout_constraintLeft_toRightOf="@+id/activity_location_label"/>
+
+            <TextView
+                android:id="@+id/activity_location_address_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_location_name_input"
+                app:layout_constraintLeft_toRightOf="@+id/activity_location_label"/>
+
+            <Button
+                android:id="@+id/btn_select_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="選擇地點"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_location_label"
+                app:layout_constraintLeft_toRightOf="@+id/activity_location_label"/>
+
+            <EditText
+                android:id="@+id/activity_remark_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                app:layout_constraintBaseline_toBaselineOf="@+id/activity_remark_label"
+                app:layout_constraintLeft_toRightOf="@+id/activity_remark_label"/>
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="儲存"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/activity_remark_label"
+                app:layout_constraintRight_toLeftOf="@id/btn_cancel"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="5dp">
+            </Button>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/activity_remark_label"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="30dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

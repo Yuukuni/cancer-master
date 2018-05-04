@@ -12,9 +12,9 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/TextViewTime"
+            android:id="@+id/MemActivityDate"
             android:layout_width="130dp"
-            android:layout_height="100dp"
+            android:layout_height="45dp"
             android:layout_span="2"
             android:background="@drawable/cell_shape"
             android:inputType="textMultiLine"
@@ -23,14 +23,13 @@
             android:scrollHorizontally="false"
             android:text=""
             android:longClickable="false"
-            android:clickable="false"
-            android:textAlignment="center" />
+            android:clickable="false" />
 
         <TextView
-            android:id="@+id/TextViewFood"
+            android:id="@+id/MemActivityTime"
             android:layout_width="105dp"
-            android:layout_height="100dp"
-            android:layout_toRightOf="@id/TextViewTime"
+            android:layout_height="45dp"
+            android:layout_toRightOf="@id/MemActivityDate"
             android:background="@drawable/cell_shape"
             android:ems="10"
             android:inputType="textMultiLine"
@@ -41,10 +40,10 @@
             android:text="" />
 
         <TextView
-            android:id="@+id/TextViewCalories"
+            android:id="@+id/MemActivityName"
             android:layout_width="147dp"
-            android:layout_height="100dp"
-            android:layout_toRightOf="@id/TextViewFood"
+            android:layout_height="45dp"
+            android:layout_toRightOf="@id/MemActivityTime"
             android:background="@drawable/cell_shape"
             android:ems="10"
             android:inputType="textMultiLine"
@@ -57,5 +56,3 @@
     </RelativeLayout>
 
 </TableRow>
-
-

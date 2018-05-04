@@ -16,11 +16,13 @@ import java.io.IOException;
  * Created by tom on 26/11/2017.
  */
 
-@Database(entities = {MoveTime.class,FoodTime.class,MoodTime.class,TmpTime.class, ChemCure.class,PutCure.class,WeightTime.class,BloodTime.class}, version = 15)
+@Database(entities = {MemSetting.class, MemActivity.class, MoveTime.class,FoodTime.class,MoodTime.class,TmpTime.class, ChemCure.class,PutCure.class,WeightTime.class,BloodTime.class}, version = 22)
 
 public abstract class CancerDatabase extends RoomDatabase {
 
     private static CancerDatabase INSTANCE;
+    public abstract MemSettingDao memSettingDao();
+    public abstract MemActivityDao memActivityDao();
     public abstract MoveTimeDao moveTimeDao();
     public abstract FoodTimeDao foodTimeDao();
     public abstract MoodTimeDao moodTimeDao();
@@ -29,11 +31,11 @@ public abstract class CancerDatabase extends RoomDatabase {
     public abstract PutCureDao putCureDao();
     public abstract TmpTimeDao tmpTimeDao();
     public abstract BloodTimeDao bloodTimeDao();
+
     public static CancerDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context,CancerDatabase.class,"cancerdatabase")
                     .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_1_4).allowMainThreadQueries().build();
-
         }
         return INSTANCE;
     }
@@ -47,8 +49,6 @@ public abstract class CancerDatabase extends RoomDatabase {
         INSTANCE = null;
     }
 
-
-
     @VisibleForTesting
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
@@ -57,7 +57,6 @@ public abstract class CancerDatabase extends RoomDatabase {
         }
     };
 
-
     @VisibleForTesting
     static final Migration MIGRATION_2_3 = new Migration(2, 3) {
         @Override
@@ -65,7 +64,6 @@ public abstract class CancerDatabase extends RoomDatabase {
 
         }
     };
-
 
     @VisibleForTesting
     static final Migration MIGRATION_3_4 = new Migration(3, 4) {
